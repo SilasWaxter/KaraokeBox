@@ -6,6 +6,7 @@
 #define SONG_Teapot
 
 #include "Karaoke.h"
+#include "NotesLookupTable.h"
 
 /*
 typedef struct songBlock    //a blueprint for the component in each song (Contains note and lyric info)
@@ -17,11 +18,11 @@ typedef struct songBlock    //a blueprint for the component in each song (Contai
 */
 
 songBlock songTeapot[37] = {
-  {noteC_5, 125, "I'm"},
-  {D_5, 125, "a"},
-  {E_5, 125, "lit-"},
-  {F_5, 125, "tle"}
-}
+  {note.C_5, 125, "I'm"},
+  {note.D_5, 125, "a"},
+  {note.E_5, 125, "lit-"},
+  {note.F_5, 125, "tle"}
+};
 
 
 /*
