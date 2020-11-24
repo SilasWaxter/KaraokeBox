@@ -13,14 +13,13 @@ void setup()
 {
 Serial.begin(9600);
 lcd.begin(16, 2); 
-lcd.write("hello");
-
+lcd.print("hello");
 
 }
 
 void loop()
 {
-  lcd.write("hello");
+  lcd.print("hello");
 }
 
 /*
@@ -31,8 +30,10 @@ void loop()
  * MusicNotes.h creates a structure with conts uint8_t members that
  * map notes on the scales (currently 3-5) to their associated freq.
  * 
- * __sdf__
- * 
- * 
- * 
- */
+ * __LCD__
+ * .begin(int x, int y) intilizes lcd with segments x by y.
+ * .print(String Msg) prints Msg to the screen
+ * .cleat() clears any characters from the screen
+*/
+
+ 
