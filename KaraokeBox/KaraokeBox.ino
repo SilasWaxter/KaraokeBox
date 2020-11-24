@@ -8,7 +8,8 @@
 #define SPEAKER_PIN 7
 
 //Firmware Defines:
-#define STARTUP_CREDITS_DELAY 1500
+#define STARTUP_CREDITS_DELAY 0
+#define STARTUP_TESTNOTE_DELAY 5000
 
 //Says which pins are hooked up to the LCD
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
@@ -31,8 +32,9 @@ void setup()
   delay(STARTUP_CREDITS_DELAY);
   lcd.clear();
 
-  tone(7, 523);
-  delay(2000);
+  //Play Test Note
+  tone(SPEAKER_PIN, note.C_5, STARTUP_TESTNOTE_DELAY);
+  
 }
 
 void loop()
