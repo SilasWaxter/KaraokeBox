@@ -11,9 +11,15 @@ LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 void setup()
 {
-Serial.begin(9600);
-lcd.begin(16, 2); 
-lcd.print("hello");
+  //Initilize Serial Comm.
+  Serial.begin(9600);
+  
+  //Initialize LCD
+  lcd.begin(16, 2); 
+  lcd.print("Karoke Box");
+  lcd.setCursor("Creators: Evan, Jacob, & Silas");
+  delay(500);
+  lcd.clear();
 
 }
 
@@ -34,6 +40,7 @@ void loop()
  * .begin(int x, int y) intilizes lcd with segments x by y.
  * .print(String Msg) prints Msg to the screen
  * .cleat() clears any characters from the screen
+ * .setCursor(int column, int row) sets the cursor to the 0-based column & row
 */
 
  
