@@ -1,7 +1,13 @@
 #include <LiquidCrystal.h>
 
-#include "NotesLookupTable.h"
-#include "Karaoke.h"
+//#include "NotesLookupTable.h"
+//#include "Karaoke.h"
+
+//Hardware Defines:
+#define SPEAKER_PIN 7
+
+//Firmware Defines:
+#define STARTUP_CREDITS_DELAY 1500
 
 //Says which pins are hooked up to the LCD
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
@@ -17,15 +23,23 @@ void setup()
   //Initialize LCD
   lcd.begin(16, 2); 
   lcd.print("Karoke Box");
-  lcd.setCursor("Creators: Evan, Jacob, & Silas");
-  delay(500);
+  lcd.setCursor(0, 1);      //start of 2nd row
+  lcd.print("Created by:");
+  delay(STARTUP_CREDITS_DELAY);
+  lcd.clear();
+  lcd.print("Evan, Jaccob,");
+  lcd.setCursor(0, 1);      //start of 2nd row
+  lcd.print("and Silas");
+  delay(STARTUP_CREDITS_DELAY);
   lcd.clear();
 
+  tone(7, 523);
+  delay(2000);
 }
 
 void loop()
 {
-  lcd.print("hello");
+  
 }
 
 /*
