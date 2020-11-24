@@ -8,33 +8,19 @@
 #include "Karaoke.h"
 #include "NotesLookupTable.h"
 
-/*
-typedef struct songBlock    //a blueprint for the component in each song (Contains note and lyric info)
-{
-  uint8_t noteFreq;     //e.g. C_5, A_3
-  uint8_t noteMilli;    //time of note in milli-seconds
-  char[8] lyric;        //corresponding lyric for note
-};
-*/
+#define SONGTEAPOT_TIMEINBAR 500    //Defines number of milliseconds in each bar
 
-songBlock songTeapot[37] = {
+const songBlock songTeapot[4] = 
+{
   {note.C_5, 125, "I'm"},
   {note.D_5, 125, "a"},
   {note.E_5, 125, "lit-"},
   {note.F_5, 125, "tle"}
 };
 
-
-/*
-
-I’m a little teapot
-Short and stout.
-Here is my handle,
-Here is my spout.
-When I get all steamed up
-Hear me shout:
-Tip me over
-And pour me out!
-*/
+const uint8_t numberOfNotesInBar[] = 
+{ 
+  4, 
+};
 
 #endif //SONG_Teapot

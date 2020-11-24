@@ -9,15 +9,17 @@
 
 //Firmware Defines:
 #define STARTUP_CREDITS_DELAY 0
-#define STARTUP_TESTNOTE_DELAY 5000
+#define STARTUP_TESTNOTE_DELAY 0
 
 //Says which pins are hooked up to the LCD
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 void setup()
 {
+  delay(500);
+  
   //Initilize Serial Comm.
-  Serial.begin(9600);
+  Serial.begin(115200);
   
   //Initialize LCD
   lcd.begin(16, 2); 
@@ -33,8 +35,13 @@ void setup()
   lcd.clear();
 
   //Play Test Note
-  tone(SPEAKER_PIN, note.C_5, STARTUP_TESTNOTE_DELAY);
-  
+  tone(SPEAKER_PIN, note.C_5);
+  delay(STARTUP_TESTNOTE_DELAY);
+  noTone(SPEAKER_PIN);
+
+
+  //Degbugging Workspace
+  Serial.println(getNumberOfSongBlocksInBar(songTeapot, 0, SONGTEAPOT_TIMEINBAR));
 }
 
 void loop()
@@ -47,7 +54,7 @@ void loop()
  * tone() is used to output the speaker note
  * noTone() is used to stop playing tone
  * 
- * MusicNotes.h creates a structure with conts uint8_t members that
+ * MusicNotes.h creates a structure with const unsigned int members that
  * map notes on the scales (currently 3-5) to their associated freq.
  * 
  * __LCD__
