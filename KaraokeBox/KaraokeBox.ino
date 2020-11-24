@@ -1,15 +1,26 @@
-#include "MusicNotes.h"
+#include <LiquidCrystal.h>
 
-void setup() {
+#include "NotesLookupTable.h"
+#include "Karaoke.h"
 
+//Says which pins are hooked up to the LCD
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+//songsMusic asdf;
+
+
+void setup()
+{
 Serial.begin(9600);
-Serial.println(note.C_5);
+lcd.begin(16, 2); 
+lcd.write("hello");
+
 
 }
 
-void loop() {
-
-
+void loop()
+{
+  lcd.write("hello");
 }
 
 /*
