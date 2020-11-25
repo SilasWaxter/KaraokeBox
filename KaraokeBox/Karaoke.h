@@ -8,7 +8,7 @@ typedef struct songBlock    //a blueprint for the component in each song (Contai
 {
   uint16_t noteFreq;        //e.g. C_5, A_3
   uint16_t noteMillis;      //time of note in milli-seconds
-  char lyric[8];            //corresponding lyric for note
+  char lyric[9];            //corresponding lyric for note
 };
 
 typedef uint16_t numberOfSongBlocksInBar;   //typedef for modularity and readabillity.
