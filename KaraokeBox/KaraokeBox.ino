@@ -3,16 +3,13 @@
 #include "NotesLookupTable.h"
 #include "Karaoke.h"
 #include "SONG_Teapot.h"
+#include "CircuitDefinitions.h"
 
-//Hardware Defines:
-#define SPEAKER_PIN 7
-
-//Firmware Defines:
-#define STARTUP_CREDITS_DELAY 0
-#define STARTUP_TESTNOTE_DELAY 0
+#define STARTUP_CREDITS_DELAY   0
+#define STARTUP_TESTNOTE_DELAY  0
 
 //Says which pins are hooked up to the LCD
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+LiquidCrystal lcd(LCD_RS, LCD_E, LCD_D4, LCD_D5, LCD_D6, LCD_D7);
 
 void setup()
 {
@@ -41,7 +38,7 @@ void setup()
 
 
   //Degbugging Workspace
-  Serial.println(getNumberOfSongBlocksInBar(songTeapot, 0, SONGTEAPOT_TIMEINBAR));
+  playSong(teapot_songBlock, teapot_numberOfSongBlocksInBar, teapot_numberOfBars);
 }
 
 void loop()

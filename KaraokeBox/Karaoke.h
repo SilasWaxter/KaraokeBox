@@ -1,28 +1,21 @@
-#ifndef karaoke
-#define karaoke
+#ifndef Karaoke
+#define Karaoke
+
+#include "CircuitDefinitions.h"
+#include "Arduino.h"
 
 typedef struct songBlock    //a blueprint for the component in each song (Contains note and lyric info)
 {
-  uint16_t noteFreq;     //e.g. C_5, A_3
-  uint16_t noteMillis;    //time of note in milli-seconds
-  char lyric[8];        //corresponding lyric for note
+  uint16_t noteFreq;        //e.g. C_5, A_3
+  uint16_t noteMillis;      //time of note in milli-seconds
+  char lyric[8];            //corresponding lyric for note
 };
 
-uint8_t getNumberOfSongBlocksInBar(songBlock song[], uint16_t startOfBarIndex, uint16_t timeInBar)
-{
-  uint16_t timeOfSongBlocks = 0;         //running total of time from songBlocks
-  uint8_t numberOfSongBlocksInBar = 0;  //counts number of songBlocks in bar
-  
-  for(numberOfSongBlocksInBar; timeOfSongBlocks < timeInBar; numberOfSongBlocksInBar++)
-  {
-    timeOfSongBlocks += song[(startOfBarIndex + numberOfSongBlocksInBar)].noteMillis;    //add time of index to running total.
+typedef uint16_t numberOfSongBlocksInBar;   //typedef for modularity and readabillity.
 
-    //Serial Debbuging
-    Serial.println("numberOfSongBlocksInBar: " + String(numberOfSongBlocksInBar) + ", timeOfSongBlocks: " + String(timeOfSongBlocks)
-                    + ", lyric @ index: " + song[(startOfBarIndex + numberOfSongBlocksInBar)].lyric);
-  }
+//Function Declarations
+void playSong(songBlock sBlocks[], numberOfSongBlocksInBar numberOfSongBlocksInBar[], uint16_t numberOfBars);
 
-  return numberOfSongBlocksInBar;
-}
+static inline uint8_t getIndexOfFirstSongBlockInBar(numberOfSongBlocksInBar sBlocksInBar[], uint8_t currentBar);
 
-#endif //karaoke
+#endif //Karaoke

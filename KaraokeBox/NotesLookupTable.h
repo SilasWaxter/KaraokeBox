@@ -3,8 +3,10 @@
  *    -https://pages.mtu.edu/~suits/notefreqs.html
  */
 
-#ifndef MusicNotes
-#define MusicNotes
+#ifndef NotesLookupTable
+#define NotesLookupTable
+
+#define NOTE_REST 0
 
 struct FrequencyOfNotes
 {
@@ -51,4 +53,4 @@ struct FrequencyOfNotes
   const unsigned int B_5 = 988;
 }note;
 
-#endif //MusicNotes
+#endif //NotesLookupTable
