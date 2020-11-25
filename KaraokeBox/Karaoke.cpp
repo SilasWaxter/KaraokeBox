@@ -14,54 +14,53 @@ void playSong(LiquidCrystal *lcd, songBlock sBlocks[], numberOfSongBlocksInBar s
   { 
       uint8_t indexOfFirstSongBlockInBar = getIndexOfFirstSongBlockInBar(sBlocksInBar, currentBar);
 
-      displayLyrics(lcd, sBlocks, sBlocksInBar, currentBar, indexOfFirstSongBlockInBar);
-
-      playMusic(sBlocks, sBlocksInBar, currentBar, indexOfFirstSongBlockInBar);
+      performBar(lcd, sBlocks, sBlocksInBar, currentBar, indexOfFirstSongBlockInBar);
   }
 }
 
-static void displayLyrics(LiquidCrystal *lcd, songBlock sBlocks[], numberOfSongBlocksInBar sBlocksInBar[], uint8_t currentBar, uint8_t indexOfFirstSongBlockInBar)
+
+static void performBar(LiquidCrystal *lcd, songBlock sBlocks[], numberOfSongBlocksInBar sBlocksInBar[], uint8_t currentBar, uint8_t indexOfFirstSongBlockInBar)
 {
-  String barsLyrics = "";
+  bool newBar = true;
+  
   for(int i = 0; i < sBlocksInBar[currentBar]; i++)                     //for each songBlock in the current Bar
   {
     uint8_t index = (indexOfFirstSongBlockInBar + i);
-    
-    barsLyrics += sBlocks[index].lyric;
-    
-    Serial.println("CurrentBar: " + String(currentBar) + ", indexOfFirstSongBlockInBar: " + String(indexOfFirstSongBlockInBar) + ", lyric: " + String(sBlocks[(indexOfFirstSongBlockInBar + i)].lyric));
-  }
 
-  if(_lyricRow == 0)
-  {
-    lcd->setCursor(0, 1);      //start of 2nd row
-    lcd->print(barsLyrics);
-
-    _lyricRow = 1;
-  }
-  else  //_lcdRow == 1
-  {
-    lcd->clear();
-    lcd->setCursor(0, 0);      //start of 1st row
-    lcd->print(barsLyrics);
+    //Print Lyrics
+    if(newBar)          //if its a new bar, change rows
+    {
+      newBar = false;   //no longer new bar
+      
+      if(_lyricRow == 0)
+      {
+        lcd->setCursor(0, 1);      //start of 2nd row
+        lcd->print(sBlocks[index].lyric);
     
-    _lyricRow = 0;
-  }
-}
+        _lyricRow = 1;
+      }
+      else  //_lcdRow == 1
+      {
+        lcd->clear();
+        lcd->setCursor(0, 0);      //start of 1st row
+        lcd->print(sBlocks[index].lyric);
+        
+        _lyricRow = 0;
+      }
+    }
+    else
+    {
+      lcd->print(sBlocks[index].lyric);
+    }
 
-static void playMusic(songBlock sBlocks[], numberOfSongBlocksInBar sBlocksInBar[], uint8_t currentBar, uint8_t indexOfFirstSongBlockInBar)
-{
-  for(int i = 0; i < sBlocksInBar[currentBar]; i++)                     //for each songBlock in the current Bar
-  {
-    uint8_t index = (indexOfFirstSongBlockInBar + i);
-    
+    //Play Music
     tone(SPEAKER_PIN, sBlocks[index].noteFreq);
     delay((sBlocks[index].noteMillis)*2);
 
     noTone(SPEAKER_PIN);
     delay(10);
 
-    Serial.println("CurrentBar: " + String(currentBar) + ", indexOfFirstSongBlockInBar: " + String(indexOfFirstSongBlockInBar) + ", lyric: " + String(sBlocks[index].noteFreq));
+    //This is messed up -->> Serial.println("CurrentBar: " + String(currentBar) + ", indexOfFirstSongBlockInBar: " + String(indexOfFirstSongBlockInBar) + ", lyric: " + String(sBlocks[index].noteFreq));
   }
 }
 
