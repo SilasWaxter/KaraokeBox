@@ -3,6 +3,7 @@
 
 #include "CircuitDefinitions.h"
 #include "Arduino.h"
+#include <LiquidCrystal.h>
 
 typedef struct songBlock    //a blueprint for the component in each song (Contains note and lyric info)
 {
@@ -13,8 +14,13 @@ typedef struct songBlock    //a blueprint for the component in each song (Contai
 
 typedef uint16_t numberOfSongBlocksInBar;   //typedef for modularity and readabillity.
 
+
 //Function Declarations
-void playSong(songBlock sBlocks[], numberOfSongBlocksInBar numberOfSongBlocksInBar[], uint16_t numberOfBars);
+void playSong(LiquidCrystal *lcd, songBlock sBlocks[], numberOfSongBlocksInBar numberOfSongBlocksInBar[], uint16_t numberOfBars);
+
+static void displayLyrics(LiquidCrystal *lcd, songBlock sBlocks[], numberOfSongBlocksInBar sBlocksInBar[], uint8_t currentBar, uint8_t indexOfFirstSongBlockInBar);
+
+static void playMusic(songBlock sBlocks[], numberOfSongBlocksInBar sBlocksInBar[], uint8_t currentBar, uint8_t indexOfFirstSongBlockInBar);
 
 static inline uint8_t getIndexOfFirstSongBlockInBar(numberOfSongBlocksInBar sBlocksInBar[], uint8_t currentBar);
 

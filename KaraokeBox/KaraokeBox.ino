@@ -1,15 +1,13 @@
-#include <LiquidCrystal.h>
-
-#include "NotesLookupTable.h"
 #include "Karaoke.h"
 #include "SONG_Teapot.h"
 #include "CircuitDefinitions.h"
 
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(LCD_RS, LCD_E, LCD_D4, LCD_D5, LCD_D6, LCD_D7);
+
 #define STARTUP_CREDITS_DELAY   0
 #define STARTUP_TESTNOTE_DELAY  0
-
-//Says which pins are hooked up to the LCD
-LiquidCrystal lcd(LCD_RS, LCD_E, LCD_D4, LCD_D5, LCD_D6, LCD_D7);
 
 void setup()
 {
@@ -38,7 +36,7 @@ void setup()
 
 
   //Degbugging Workspace
-  playSong(teapot_songBlock, teapot_numberOfSongBlocksInBar, teapot_numberOfBars);
+  playSong(&lcd, teapot_songBlock, teapot_numberOfSongBlocksInBar, teapot_numberOfBars);
 }
 
 void loop()
